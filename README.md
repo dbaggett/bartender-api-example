@@ -8,6 +8,9 @@ The implementation should honor the api specs which currently are written in api
 used for api spec validation against the implementation. Currently, there is no api validation tool in place for the
 raml spec.
 
+Credit is due to https://github.com/vjames19/kotlin-microservice-example as some useful extensions/helpers were used
+from this project. Also, https://github.com/vjames19/kotlin-futures was used to make working with futures easier.
+
 # Run
 ```
 ./gradlew funktionale-jooby-api:run
