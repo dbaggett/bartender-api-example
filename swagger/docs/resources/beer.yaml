@@ -1,0 +1,26 @@
+Beer:
+  required:
+    - id
+    - type
+    - style
+    - alcoholByVolume
+  properties:
+    id:
+      type: string
+      example: Hell's Pale Ale
+    type:
+      type: string
+      enum: [ale, lager]
+      example: ale
+    style:
+      type: string
+      enum: [amber, blonde, bock, dark, ipa, light, pale, pilsner, porter, stout, wheat]
+      example: pale
+    alcoholByVolume:
+      type: float
+      example: 5.5
+  example:
+    id: Hell's Pale Ale
+    type: ale
+    style: pale
+    alcoholByVolume: 5.5

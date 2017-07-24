@@ -1,0 +1,15 @@
+{
+    "allOf": [
+        {
+            "$ref": "../common/status.schema#"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "result": {
+                    "$ref": "../resources/listing.schema#"
+                }
+            }
+        }
+    ]
+}

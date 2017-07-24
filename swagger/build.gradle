@@ -1,0 +1,11 @@
+dependencies {
+    compile(project(':funktionale-jooby-api'))
+}
+
+task startServer() doLast {
+    project(':funktionale-jooby-api').tasks.run.execute()
+}
+
+task validateApi(type: Exec) {
+    commandLine 'dredd'
+}

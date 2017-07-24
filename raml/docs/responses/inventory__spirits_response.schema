@@ -1,0 +1,18 @@
+{
+    "allOf": [
+        {
+            "$ref": "../common/status.schema#"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "../resources/spirit.schema#"
+                    }
+                }
+            }
+        }
+    ]
+}

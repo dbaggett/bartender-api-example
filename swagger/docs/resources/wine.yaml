@@ -1,0 +1,17 @@
+Wine:
+  required:
+    - id
+    - type
+    - style
+    - alcoholByVolume
+  properties:
+    id:
+      type: string
+    type:
+      type: string
+      enum: [red, white]
+    style:
+      type: string
+      enum: [cabernet, chardonnay, pinot noir, sauvignon, zinfandel]
+    alcoholByVolume:
+      type: float

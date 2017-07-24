@@ -1,0 +1,14 @@
+Listing:
+  properties:
+    beer:
+      type: array
+      items:
+        $ref: "resources/beer.yaml#/Beer"
+    spirits:
+      type: array
+      items:
+        $ref: "resources/spirit.yaml#/Spirit"
+    wine:
+      type: array
+      items:
+        $ref: "resources/wine.yaml#/Wine"

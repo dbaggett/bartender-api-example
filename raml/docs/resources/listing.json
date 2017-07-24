@@ -1,0 +1,10 @@
+{
+  "beer": [
+    {
+      "id": "test",
+      "type": "ale",
+      "style": "pale",
+      "abv": 4.5
+    }
+  ]
+}

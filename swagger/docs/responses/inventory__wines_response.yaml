@@ -1,0 +1,8 @@
+type: object
+allOf:
+  - $ref: "../common/status.yaml"
+  - properties:
+      results:
+        type: array
+        items:
+          $ref: "../resources/wine.yaml#/Wine"

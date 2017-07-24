@@ -1,0 +1,9 @@
+rootProject.name = 'bartender'
+include 'swagger'
+include 'api-blueprint'
+include 'raml'
+include 'common-domain'
+include 'funktionale'
+include 'funktionale-implementation'
+include 'funktionale-jooby-api'
+

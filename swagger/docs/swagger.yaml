@@ -1,0 +1,174 @@
+swagger: "2.0"
+info:
+  version: "1"
+  title: Swagger Bartender
+  description: A sample API that uses a bartender to demo swagger
+host: localhost
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json;charset=UTF-8
+definitions:
+  Error:
+    properties:
+      status:
+        type: string
+      message:
+        type: string
+responses:
+  Standard400ErrorResponse:
+    description: Typically invalid/missing object property
+    schema:
+      $ref: '#/definitions/Error'
+  Standard401ErrorResponse:
+    description: Bartender credentials not provided
+    schema:
+      $ref: '#/definitions/Error'
+securityDefinitions:
+  AdminSecurity:
+    type: apiKey
+    in: query
+    name: bartender-session-id
+  UserSecurity:
+    type: apiKey
+    in: header
+    name: over-21-api-key
+paths:
+  /inventory/beers:
+    get:
+      summary: Get beers
+      description: Returns the complete inventory of beers.
+      security:
+        - AdminSecurity: []
+      responses:
+        200:
+          description: Inventory of beers
+          schema:
+            $ref: "/responses/inventory__beers_response.yaml"
+    post:
+      summary: Add a beer
+      description: Inserts a new beer into the inventory.
+      security:
+        - AdminSecurity: []
+      parameters:
+        - in: body
+          name: beer
+          description: The beer to store.
+          schema:
+            $ref: "/resources/beer.yaml#/Beer"
+      responses:
+        200:
+          description: Beer added
+          schema:
+            $ref: "/common/status.yaml"
+        400:
+          $ref: "'#/responses/Standard400ErrorResponse'"
+        401:
+          $ref: "'#/responses/Standard401ErrorResponse'"
+  /inventory/spirits:
+    get:
+      summary: Get spirits
+      description: Returns the complete inventory of spirits.
+      security:
+        - AdminSecurity: []
+      responses:
+        200:
+          description: Inventory of spirits
+          schema:
+            $ref: "/responses/inventory__spirits_response.yaml"
+    post:
+      summary: Add a spirit
+      description: Inserts a new spirit into the inventory.
+      security:
+        - AdminSecurity: []
+      parameters:
+        - in: body
+          name: spirit
+          description: The spirit to store.
+          schema:
+            $ref: "resources/spirit.yaml#/Spirit"
+      responses:
+        200:
+          description: Spirit added
+          schema:
+            $ref: "/common/status.yaml"
+        400:
+          $ref: "'#/responses/Standard400ErrorResponse'"
+        401:
+          $ref: "'#/responses/Standard401ErrorResponse'"
+  /inventory/wines:
+      get:
+        summary: Get wines
+        description: Returns the complete inventory of wines.
+        security:
+          - AdminSecurity: []
+        responses:
+          200:
+            description: Inventory of wines
+            schema:
+              $ref: "/responses/inventory__wines_response.yaml"
+      post:
+        summary: Add a wine
+        description: Inserts a new wine into the inventory.
+        security:
+          - AdminSecurity: []
+        parameters:
+          - in: body
+            name: wine
+            description: The wine to store.
+            schema:
+              $ref: "resources/wine.yaml#/Wine"
+        responses:
+          200:
+            description: Wine added
+            schema:
+              $ref: "/common/status.yaml"
+          400:
+            $ref: "'#/responses/Standard400ErrorResponse'"
+          401:
+            $ref: "'#/responses/Standard401ErrorResponse'"
+  /listing:
+    get:
+      summary: Get listing
+      description: Returns a listing for each type of alcoholic beverage in the inventory.
+      parameters:
+        - name: alcoholType
+          in: query
+          description: The type of alcohol to list
+          type: string
+          enum: [beer, spirit, wine]
+          required: false
+      responses:
+        200:
+          description: Listing of alcoholic beverages
+          schema:
+            $ref: "/responses/listing__response.yaml"
+  /serving:
+    get:
+      summary: Get serving
+      description: Returns a serving of the specified alcoholic beverage.
+      parameters:
+        - name: id
+          in: query
+          description: The specific beverage - unique identifier across all types of alcohol
+          type: string
+          required: true
+          x-example: "Hell's Pale Ale"
+      security:
+        - UserSecurity: []
+      responses:
+        200:
+          description: A serving
+          schema:
+            $ref: "/responses/serving__response.yaml"
+        400:
+          description: Invalid/missing beverage id
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: No age proof provided
+          schema:
+            $ref: '#/definitions/Error'

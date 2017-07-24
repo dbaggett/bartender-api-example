@@ -1,0 +1,16 @@
+Spirit:
+  required:
+    - id
+    - type
+    - alcoholByVolume
+    - proof
+  properties:
+    id:
+      type: string
+    type:
+      type: string
+      enum: [brandy, gin, rum, tequila, whiskey, vodka]
+    alcoholByVolume:
+      type: float
+    proof:
+      type: float

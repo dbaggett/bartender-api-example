@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "red",
+                "white"
+            ]
+        },
+        "style": {
+            "type": "string",
+            "enum": [
+                "cabernet",
+                "chardonnay",
+                "pinot noir",
+                "sauvignon",
+                "zinfandel"
+            ]
+        }
+    },
+    "required": [
+        "id",
+        "type",
+        "style"
+    ]
+}

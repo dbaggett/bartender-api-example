@@ -1,0 +1,31 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "brand",
+                "gin",
+                "rum",
+                "tequila",
+                "whiskey",
+                "vodka"
+            ]
+        },
+        "abv": {
+            "type": "float"
+        }
+        "proof": {
+            "type": "float"
+        }
+    },
+    "required": [
+        "id",
+        "type",
+        "abv",
+        "proof"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "type": "object",
+    "properties": {
+        "beer": {
+            "type": "array",
+            "items": {
+                "$ref": "beer.schema#"
+            }
+        },
+        "spirits": {
+            "type": "array",
+             "items": {
+                "$ref": "spirit.schema#"
+             }
+        },
+        "wine": {
+            "type": "array",
+             "items": {
+                "$ref": "wine.schema#"
+             }
+        }
+    }
+}

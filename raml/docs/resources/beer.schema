@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "ale",
+                "lager"
+            ]
+        },
+        "style": {
+            "type": "string",
+            "enum": [
+                "amber",
+                "blonde",
+                "bock",
+                "dark",
+                "ipa",
+                "light",
+                "pale",
+                "pilsner",
+                "porter",
+                "stout",
+                "wheat"
+            ]
+        },
+        "abv": {
+            "type": "float"
+        }
+    },
+    "required": [
+        "id",
+        "type",
+        "style",
+        "abv"
+    ]
+}

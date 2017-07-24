@@ -1,0 +1,27 @@
+dependencies {
+    compile project(':funktionale-implementation')
+    compile "com.google.inject:guice:$guiceVersion"
+    compile 'org.jooby:jooby-lang-kotlin:1.1.2'
+    compile "org.jooby:jooby-netty:1.1.2"
+    compile "org.jooby:jooby-jackson:1.1.2"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.7"
+    testCompile 'org.jetbrains.spek:spek-api:1.1.2'
+    testRuntime 'org.jetbrains.spek:spek-junit-platform-engine:1.1.2'
+    testCompile "org.junit.platform:junit-platform-launcher:1.0.0-M4"
+    testCompile 'org.amshove.kluent:kluent:1.23'
+    testCompile 'io.rest-assured:rest-assured:3.0.3'
+}
+
+apply plugin: 'application'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
+    platformVersion '1.0.0-M4'
+}
+
+mainClassName = "io.github.dbaggett.functional.bartender.api.server.ServerKt"

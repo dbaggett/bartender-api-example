@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":common-domain")
+    compile "org.funktionale:funktionale-all:1.1"
+}

@@ -1,0 +1,15 @@
+dependencies {
+    compile(project(':funktionale-jooby-api'))
+}
+
+task startServer() doLast {
+    project(':funktionale-jooby-api').tasks.run.execute()
+}
+
+task transcludeApiDocs(type: Exec) {
+    commandLine 'hercule', 'docs/src/bartender.apib', '-o', 'docs/bartender.apib'
+}
+
+task validateApi(type: Exec, dependsOn: transcludeApiDocs) {
+    commandLine 'dredd'
+}

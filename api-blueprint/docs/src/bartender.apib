@@ -1,0 +1,200 @@
+FORMAT: 1A
+HOST: http://localhost:8080/
+
+# API Blueprint Bartender
+
+A sample api that uses a bartender to demo api blueprint
+
+## Group Inventory
+
+Inventory resources
+
+### Beer Collection [/inventory/beers]
+
+#### Get beers [GET]
+
+Returns the complete inventory of beers.
+
++ Response 200 (application/json;charset=UTF-8)
+
+    Inventory of beers.
+    
+    + Attributes
+        :[](common/status.apib)
+        + results (array, required)
+            + (object)
+                :[](resources/beer.apib)
+                
+#### Add a beer [POST]
+
+Inserts a beer into the inventory.
+
++ Request (application/json)
+    + Attributes
+        :[](resources/beer.apib)
+        
++ Response 200 (application/json;charset=UTF-8)
+
+    Beer added.
+    
+    + Attributes
+        :[](common/status.apib)
+        
++ Response 400 (application/json;charset=UTF-8)
+
+    Invalid request such as invalid/missing beer properties.
+    
+    + Attributes
+        :[](common/error_400.apib)
+        
++ Response 401 (application/json;charset=UTF-8)
+
+    Bartender credentials not provided.
+    
+    + Attributes
+        :[](common/error_401.apib)
+        
+### Spirit Collection [/inventory/spirits]
+
+#### Get spirits [GET]
+
+Returns the complete inventory of spirits.
+
++ Response 200 (application/json;charset=UTF-8)
+
+    Inventory of spirits.
+    
+    + Attributes
+        :[](common/status.apib)
+        + results (array, required)
+            + (object)
+                :[](resources/spirit.apib)
+                
+#### Add a spirit [POST]
+
+Inserts a spirit into the inventory.
+
++ Request (application/json)
+    + Attributes
+        :[](resources/spirit.apib)
+        
++ Response 200 (application/json;charset=UTF-8)
+
+    Spirit added.
+    
+    + Attributes
+        :[](common/status.apib)
+        
++ Response 400 (application/json;charset=UTF-8)
+
+    Invalid request such as invalid/missing spirit properties.
+    
+    + Attributes
+        :[](common/error_400.apib)
+        
++ Response 401 (application/json;charset=UTF-8)
+
+    Bartender credentials not provided.
+    
+    + Attributes
+        :[](common/error_401.apib)
+        
+### Wine Collection [/inventory/wines]
+
+#### Get wine [GET]
+
+Returns the complete inventory of wine.
+
++ Response 200 (application/json;charset=UTF-8)
+
+    Inventory of wine.
+    
+    + Attributes
+        :[](common/status.apib)
+        + results (array, required)
+            + (object)
+                :[](resources/wine.apib)
+                
+#### Add wine [POST]
+
+Inserts wine into the inventory.
+
++ Request (application/json)
+    + Attributes
+        :[](resources/wine.apib)
+        
++ Response 200 (application/json;charset=UTF-8)
+
+    Wine added.
+    
+    + Attributes
+        :[](common/status.apib)
+        
++ Response 400 (application/json;charset=UTF-8)
+
+    Invalid request such as invalid/missing wine properties.
+    
+    + Attributes
+        :[](common/error_400.apib)
+        
++ Response 401 (application/json;charset=UTF-8)
+
+    Bartender credentials not provided.
+    
+    + Attributes
+        :[](common/error_401.apib)
+        
+## Group Listing
+
+### Listing [GET /listing{?alcoholType}]
+
+Returns a listing for each type of alcoholic beverage in the inventory.
+
++ Parameters
+    + alcoholType: beer (enum[string], optional) - The type of alcohol to list.
+        + Members
+            + beer
+            + spirit
+            + wine
+    
++ Response 200 (application/json;charset=UTF-8)
+
+    Listing of alcoholic beverages.
+    
+    + Attributes
+        :[](common/status.apib)
+        + result (object, required)
+            :[](resources/listing.apib)
+            
+## Group Serving
+
+### Serving [GET /serving{?id}]
+
+Returns a serving of the specified alcoholic beverage.
+
++ Parameters
+    + id: Hell's Pale Ale (string, required) - The specific beverage, unique identifier across all types of alcohol
+    
++ Response 200 (application/json;charset=UTF-8)
+
+    A serving.
+    
+    + Attributes
+        :[](common/status.apib)
+        + result (object, required)
+            :[](resources/serving.apib)
+            
++ Response 400 (application/json;charset=UTF-8)
+
+    Invalid/missing beverage id.
+    
+    + Attributes
+        :[](common/error_400.apib)
+        
++ Response 401 (application/json;charset=UTF-8)
+
+    No age proof provided.
+    
+    + Attributes
+        :[](common/error_401.apib)
+        

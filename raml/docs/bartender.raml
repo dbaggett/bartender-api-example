@@ -1,0 +1,113 @@
+#%RAML 1.0
+title: RAML Bartender
+version: 1
+baseUri: http://{host}/api/v1
+mediaType: application/json
+baseUriParameters:
+  host:
+    description: The domain and port for the endpoints.
+securitySchemes:
+  cookie_session_id:
+    type: x-custom
+    description: Session cookie. BARTENDER_SESSION_ID specifically.
+    describedBy:
+      headers:
+        Cookie:
+          type: string
+          required: true
+  api_header_key:
+    type: Pass Through
+    description: Key which grants users the ability to get servings.
+    describedBy:
+      headers:
+        api_key:
+          type: string
+resourceTypes:
+  collection:
+    description: Complete inventory of <<resourcePathName>>s.
+    securedBy: [ cookie_session_id ]
+    get:
+      description: Inventory of <<resourcePathName>>s
+      responses:
+        200:
+          body:
+            schema: <<collectionResponseSchema>>
+    post:
+      description: Inserts a new <<resourcePathName>> into the inventory.
+      body:
+        example: <<objectExample>>
+        schema: <<objectSchema>>
+      responses:
+        200:
+          description: <<resourcePathName>> added.
+          body:
+            schema: <<responseSchema>>
+        400:
+          description: Typically invalid/missing object property
+          body:
+            schema: !include ./common/error.schema
+        401:
+          description: Bartender credentials not provided
+          body:
+            schema: !include ./common/error.schema
+/inventory/beers:
+  type:
+    collection:
+      collectionResponseSchema: !include ./responses/inventory__beers_response.schema
+      responseSchema: !include ./common/status.schema
+      objectExample: !include ./resources/beer.json
+      objectSchema: !include ./resources/beer.schema
+/inventory/spirits:
+  type:
+    collection:
+      collectionResponseSchema: !include ./responses/inventory__spirits_response.schema
+      responseSchema: !include ./common/status.schema
+      objectExample: !include ./resources/spirit.json
+      objectSchema: !include ./resources/spirit.schema
+/inventory/wines:
+  type:
+    collection:
+      collectionResponseSchema: !include ./responses/inventory__wines_response.schema
+      responseSchema: !include ./common/status.schema
+      objectExample: !include ./resources/wine.json
+      objectSchema: !include ./resources/wine.schema
+/listing:
+  get:
+    description: Returns a listing for each type of alcoholic beverage in the inventory.
+    queryParameters:
+      alcoholType:
+        type: string
+        enum: [ beer, spirit, wine ]
+        required: false
+        description: The type of alcohol to list
+    responses:
+      200:
+        description: Listing of alcoholic beverages
+        body:
+          schema: !include ./responses/listing__response.schema
+          objectExample: !include ./resources/listing.json
+          objectSchema: !include ./resources/listing.schema
+/serving:
+  get:
+    description: Returns a serving of the specified alcoholic beverage.
+    queryParameters:
+      id:
+        type: string
+        required: true
+        description: The specific beverage, unique identifier across all types of alcohol
+    securedBy: [ api_header_key ]
+    responses:
+      200:
+        description: A serving
+        body:
+          schema: !include ./responses/serving__response.schema
+          objectExample: !include ./resources/serving.json
+          objectSchema: !include ./resources/serving.schema
+      400:
+        description: Invalid/missing beverage id
+        body:
+          schema: !include ./common/error.schema
+      401:
+        description: No age proof provided
+        body:
+          schema: !include ./common/error.schema

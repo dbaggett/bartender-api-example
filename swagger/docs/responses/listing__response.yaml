@@ -1,0 +1,6 @@
+type: object
+allOf:
+  - $ref: "../common/status.yaml"
+  - properties:
+    result:
+      $ref: "../resources/listing.yaml"

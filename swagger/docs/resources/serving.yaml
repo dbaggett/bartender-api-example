@@ -1,0 +1,6 @@
+Serving:
+  required:
+    - selection
+  properties:
+    selection:
+      type: string
